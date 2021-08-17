@@ -1,0 +1,20 @@
+{
+  "name": "fisheye",
+  "version": "1.0.0",
+  "description": "P6",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./assets/sass/style.scss:./assets/css/style.css --style compressed",
+    "prefix": "postcss ./assets/css/style.css --use autoprefixer -d assets/css/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Godrade/JorisRuggeri_6_23072021.git"
+  },
+  "author": "Joris Ruggeri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Godrade/JorisRuggeri_6_23072021/issues"
+  },
+  "homepage": "https://github.com/Godrade/JorisRuggeri_6_23072021#readme"
+}
