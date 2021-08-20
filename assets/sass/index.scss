@@ -1,0 +1,102 @@
+* {
+  font-family: sans-serif;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+header {
+  display: inline-block;
+  width: 100%;
+}
+
+nav {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  bottom: 65px;
+}
+
+.tag {
+  display: inline-block;
+
+  p {
+    border-radius: 20px;
+    border: 1px solid $grey;
+    padding: 4px 6px 4px 6px;
+    margin: 2px;
+    color: $red;
+  }
+}
+
+main {
+  .title {
+    color: $red;
+    font-weight: lighter;
+    font-size: 36px;
+    float: right;
+    position: relative;
+    bottom: 130px;
+    right: 115px;
+  }
+
+
+  .profil-user {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: stretch;
+    align-items: flex-start;
+
+    .user-item {
+      flex: 1 1 33%;
+      margin-bottom: 30px;
+
+      img {
+        width: 220px;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      p {
+        font-size: 36px;
+        color: $orange;
+        margin-top: 15px;
+        margin-bottom: 0;
+      }
+
+      .user-tag {
+        .tag {
+          p {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    .info-user {
+      .city {
+        font-size: 13px;
+        color: $orange;
+        margin: 0;
+      }
+
+      .description {
+        font-size: 10px;
+        color: black;
+        margin-top: 5px;
+        margin-bottom: 0;
+      }
+
+      .price {
+        margin-top: 5px;
+        font-size: 9px;
+        color: $grey;
+      }
+    }
+  }
+}
