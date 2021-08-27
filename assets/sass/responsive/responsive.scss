@@ -1,0 +1,25 @@
+@media screen and (max-width: map-get($breakpoints, xl)) {}
+
+@media screen and (max-width: map-get($breakpoints, lg)) {
+  main {
+    .profil-user {
+      .user-item {
+        flex: 1 1 50%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: map-get($breakpoints, md)) {}
+
+@media screen and (max-width: map-get($breakpoints, sm)) {
+  main {
+    .profil-user {
+      .user-item {
+        flex: 1 1 100%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: map-get($breakpoints, xs)) {}

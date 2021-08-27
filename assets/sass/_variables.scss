@@ -1,3 +1,13 @@
-$red : #901C1C;
-$orange : #D3573C;
-$grey : #757575;
+/* Colors */
+$red: #901C1C;
+$orange: #D3573C;
+$grey: #757575;
+
+/* BreakPoints */
+$breakpoints: (
+        xs: 355px,
+        sm: 576px,
+        md: 767px,
+        lg: 992px,
+        xl: 1200px
+);
