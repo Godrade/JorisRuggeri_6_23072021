@@ -100,3 +100,102 @@ main {
     }
   }
 }
+
+.content-user {
+  position: relative;
+  top: 60px;
+}
+
+.profil {
+  padding: 50px;
+  height: 310px;
+  background: $grey-light;
+
+  .profil-info {
+    margin-top: auto;
+    margin-bottom: auto;
+    display: inline-block;
+
+    .user-name {
+      font-size: 64px;
+      color: $orange;
+      font-weight: normal;
+      margin: 0;
+    }
+
+    .user-city {
+      font-size: 24px;
+      margin: 0;
+      color: $red;
+    }
+
+    .user-desc {
+      font-size: 18px;
+      color: $grey;
+    }
+  }
+
+  .user {
+    float: right;
+
+    img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+}
+
+.container {
+  margin-left: 75px;
+  margin-right: 75px;
+}
+
+.portfolio {
+  width: 100%;
+  column-gap: 115px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch;
+  align-items: flex-start;
+
+  .portfolio-item {
+    margin-bottom: 30px;
+  }
+
+  img {
+    width: 500px;
+    height: 500px;
+    border-radius: 5px;
+    object-fit: cover;
+  }
+
+  .portfolio-name {
+    margin-top: 5px;
+    display: inline-block;
+    color: $red;
+    font-size: 24px;
+    font-weight: 400;
+  }
+
+  .portfolio-like {
+    margin-top: 5px;
+    float: right;
+    font-size: 24px;
+    color: $red;
+
+  }
+}
+
+.content-dropdown {
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  p {
+    color: black;
+    font-size: 18px;
+    font-weight: 700;
+    display: inline-block;
+  }
+}
