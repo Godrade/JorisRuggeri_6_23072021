@@ -18,15 +18,25 @@ nav {
   bottom: 65px;
 }
 
-.tag {
-  display: inline-block;
+a {
+  text-decoration: none;
+}
 
-  p {
+.tag {
+  display: inline-flex;
+
+  button {
+    background-color: transparent;
     border-radius: 20px;
     border: 1px solid $grey;
     padding: 4px 6px 4px 6px;
     margin: 2px;
     color: $red;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.18);
+    }
   }
 }
 
@@ -71,7 +81,7 @@ main {
 
       .user-tag {
         .tag {
-          p {
+          button {
             font-size: 12px;
           }
         }
