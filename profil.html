@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link href="../assets/css/style.css" type="text/css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+<header>
+    <img src="../assets/images/logo.png" alt="Logo FishEye">
+</header>
+<main>
+    <section class="container profil">
+        <div class="content-user">
+            <div class="profil-info">
+                <h1 class="user-name" id="name"></h1>
+                <p class="user-city" id="city"></p>
+                <p class="user-desc" id="desc"></p>
+                <div class="user-tag" id="user-tag"></div>
+                <button class="btn btn-contact modal-btn">Contactez-moi</button>
+            </div>
+            <div class="user">
+                <img alt="Image de profil" id="img-profil">
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <div class="content-dropdown">
+            <p>Trier par</p>
+            <button class="btn-dropdown dropbtn">
+                Popularité
+                <i class="fas fa-chevron-up"></i>
+            </button>
+        </div>
+        <div class="portfolio" id="portfolio"></div>
+    </section>
+
+    <!-- MODAL -->
+    <div class="bground">
+        <div class="content">
+            <span class="close"></span>
+            <div class="modal-body">
+                <form id="form" name="contact" action="profil.html" method="get">
+                    <h2>Contactez-moi <span id="contact-name"></span></h2>
+                    <div class="formData">
+                        <label for="firstName">Prénom</label><br>
+                        <input class="text-control" type="text" id="form_firstName" name="form_firstName" minlength="2"/>
+                        <span class="text-error" id="firstName-error"></span><br>
+                    </div>
+                    <div class="formData">
+                        <label for="lastName">Nom</label><br>
+                        <input class="text-control" type="text" id="form_lastName" name="form_lastName"/>
+                        <span class="text-error" id="lastName-error"></span><br>
+                    </div>
+                    <div class="formData">
+                        <label for="email">E-mail</label><br>
+                        <input class="text-control" type="email" id="form_email" name="form_email"/>
+                        <span class="text-error" id="email-error"></span><br>
+                    </div>
+                    <div class="formData">
+                        <label for="quantity">Votre message</label><br>
+                        <textarea type="text" class="text-control" id="form_message" name="form_message" rows="5"></textarea>
+                        <span class="text-error" id="quantity-error"></span><br>
+                    </div>
+                    <button class="btn-submit button" type="submit">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="assets/js/ProfilClass.js"></script>
+<script src="assets/js/controller.js"></script>
+</body>
+</html>
