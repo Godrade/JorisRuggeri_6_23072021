@@ -1,26 +1,26 @@
 class ProfilClass  {
 
     constructor() {
-        this.getJson();
     }
 
     //Recovery json data
     getJson = async () => { 
         const response = await fetch('assets/data/data.json')
-        const data = await response.json();
-        this.createIndexDynamicDom(data);
+        return await response.json();
     }
 
     //Create Dom Element
-    createIndexDynamicDom(data){
-        let i = 0;
-        data['photographers'].forEach(element => {
+    createIndexDynamicDom = async (data) => {
+        data = await data;
+        await data['photographers'].forEach(element => {
+            let i = element.id;
+
             let divElt = document.createElement('div');
             divElt.className = 'user-item';
             divElt.id = `user-item-${i}` 
     
             let aElt = document.createElement('a');
-            aElt.href = `profil/${element.name}`;
+            aElt.href = `profil/?id=${element.id}`;
             aElt.id = `link-profil-${i}`;
     
             let divAfterLink = document.createElement('div');
@@ -56,7 +56,6 @@ class ProfilClass  {
     
             let divTag = document.createElement('div');
             divTag.id = `tag-${i}`;
-            divTag.style.display = 'inline-flex';
             divTag.className = 'tag';
         
     
@@ -76,10 +75,12 @@ class ProfilClass  {
                 let buttonTag = document.createElement('button');
                 buttonTag.textContent = tag;
                 document.getElementById(`tag-${i}`).appendChild(buttonTag);
-                console.log(`Tag de ${element.name}: ${tag}`);
             })
-    
-            i++;
+
         });
+    }
+
+    createProfilDynamicDom = async (data) => {
+        console.log(await data['id'][243]);
     }
 }
