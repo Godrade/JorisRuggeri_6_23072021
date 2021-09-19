@@ -5,7 +5,7 @@ switch(url){
     case '/':
         profil.createIndexDynamicDom(profil.getJson());
         const tagList = document.querySelectorAll("button");
-        tagList.forEach((element) => element.addEventListener("click",() => console.log(element.id)));
+        tagList.forEach((element) => element.addEventListener("click",() => profil.updateIndexDomForTag(element.id)));
     break;
     case '/profil/':
         profil.createProfilDynamicDom(profil.getJson());
@@ -14,4 +14,4 @@ switch(url){
             console.log("Error page not found");
 }
 
-console.log(url);
+console.log('Url is',url);

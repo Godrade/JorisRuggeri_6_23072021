@@ -4,28 +4,45 @@ class ProfilClass  {
     }
 
     //Recovery json data
-    getJson = async () => { 
+    getJson = async (tag = null) => { 
         const response = await fetch('assets/data/data.json')
-        return await response.json();
+        let data = await response.json();
+
+        //Search tag list
+        const arr = [];
+        if (tag){
+            data['photographers'].forEach(element => {
+                if(element.tags.includes(tag.toLowerCase())){
+                    arr.push(element);
+                }
+            })
+            return arr;
+        } else return data;
     }
 
     //Create Dom Element
-    createIndexDynamicDom = async (data) => {
+    createIndexDynamicDom = async (data, tag = false) => {
         data = await data;
-        await data['photographers'].forEach(element => {
+
+        if(tag){
+            let test = document.querySelectorAll('.user-item');
+            test.forEach(element => {document.getElementById(element.id).remove()})
+        }
+
+        data['photographers'].forEach(element => {
             let i = element.id;
 
             let divElt = document.createElement('div');
             divElt.className = 'user-item';
-            divElt.id = `user-item-${i}` 
+            divElt.id = `user-item-${element.id}` 
     
             let aElt = document.createElement('a');
             aElt.href = `profil/?id=${element.id}`;
-            aElt.id = `link-profil-${i}`;
+            aElt.id = `link-profil-${element.id}`;
     
             let divAfterLink = document.createElement('div');
             divAfterLink.className = 'user';
-            divAfterLink.id = `user-${i}`;
+            divAfterLink.id = `user-${element.id}`;
     
             const link = element.name.split(' ');
             let imgElt = document.createElement('img');
@@ -36,7 +53,7 @@ class ProfilClass  {
     
             let divAfterUser = document.createElement('div');
             divAfterUser.className = "info-user";
-            divAfterUser.id = `info-user-${i}`;
+            divAfterUser.id = `info-user-${element.id}`;
     
             let pCity = document.createElement('p');
             pCity.className = 'city'
@@ -52,32 +69,37 @@ class ProfilClass  {
     
             let divBTag = document.createElement('div');
             divBTag.className = 'user-tag';
-            divBTag.id = `user-tag-${i}`;
+            divBTag.id = `user-tag-${element.id}`;
     
             let divTag = document.createElement('div');
-            divTag.id = `tag-${i}`;
+            divTag.id = `tag-${element.id}`;
             divTag.className = 'tag';
         
     
             document.getElementById("profil-user").appendChild(divElt);
-            document.getElementById(`user-item-${i}`).appendChild(aElt);
-            document.getElementById(`link-profil-${i}`).appendChild(divAfterLink);
-            document.getElementById(`user-${i}`).appendChild(imgElt);
-            document.getElementById(`user-${i}`).appendChild(pElt);
-            document.getElementById(`link-profil-${i}`).appendChild(divAfterUser);
-            document.getElementById(`info-user-${i}`).appendChild(pCity);
-            document.getElementById(`info-user-${i}`).appendChild(pDesc);
-            document.getElementById(`info-user-${i}`).appendChild(pPrice);
-            document.getElementById(`link-profil-${i}`).appendChild(divBTag);
-            document.getElementById(`user-tag-${i}`).appendChild(divTag);
+            document.getElementById(`user-item-${element.id}`).appendChild(aElt);
+            document.getElementById(`link-profil-${element.id}`).appendChild(divAfterLink);
+            document.getElementById(`user-${element.id}`).appendChild(imgElt);
+            document.getElementById(`user-${element.id}`).appendChild(pElt);
+            document.getElementById(`link-profil-${element.id}`).appendChild(divAfterUser);
+            document.getElementById(`info-user-${element.id}`).appendChild(pCity);
+            document.getElementById(`info-user-${element.id}`).appendChild(pDesc);
+            document.getElementById(`info-user-${element.id}`).appendChild(pPrice);
+            document.getElementById(`link-profil-${element.id}`).appendChild(divBTag);
+            document.getElementById(`user-tag-${element.id}`).appendChild(divTag);
     
             element.tags.forEach(tag => {
                 let buttonTag = document.createElement('button');
                 buttonTag.textContent = tag;
-                document.getElementById(`tag-${i}`).appendChild(buttonTag);
+                document.getElementById(`tag-${element.id}`).appendChild(buttonTag);
             })
 
         });
+    }
+
+    updateIndexDomForTag = async (tag) => {
+        let data = await this.getJson(tag);
+        this.createIndexDynamicDom({'photographers' : data}, true);
     }
 
     createProfilDynamicDom = async (data) => {
