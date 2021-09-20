@@ -132,14 +132,36 @@ class ProfilClass  {
             i++;
         })
 
+        this.createPortfolioElement(null, userID)
+    }
 
-        //get Media by UserID
-        let media = [];
-        dataJson['media'].forEach(element => {
-            if (element.photographerId == userID){
-                media.push(element)
-            }
-        })
+    createPortfolioElement = async (sort = null, userID = null) => {
+        let data = await this.getJson();
+        let media = this.getMedia(data, userID);
+        let user = this.getUser(data, userID);
+
+        if(sort == 'orderByLike'){
+            this.removedPortfolioItem();
+            media.sort(function (a, b){return b.likes - a.likes;});
+        }
+
+        if(sort == 'orderByName'){
+            this.removedPortfolioItem();
+            media.sort(function (x, y){
+                let a = x.title.toUpperCase(),
+                b = y.title.toUpperCase();
+                return a == b ? 0 : a > b ? 1 : -1;
+            });
+        }
+
+        if(sort == 'orderByDate'){
+            this.removedPortfolioItem();
+            console.log(media.sort(function (x, y){
+                let a = new Date(x.date),
+                    b = new Date(y.date);
+                return a - b;
+            }));
+        }
 
 
         //Created DOM for media Elements
@@ -191,6 +213,36 @@ class ProfilClass  {
         })
     }
 
+    //Remove Dom element
+    removedPortfolioItem(){
+        let portfolioDomItem = document.querySelectorAll('.portfolio-item');
+        portfolioDomItem.forEach(element => {document.getElementById(element.id).remove()})
+    }
+
+
+    //get Media by UserID
+    getMedia(data, userID){
+        let media = [];
+        data['media'].forEach(element => {
+            if (element.photographerId == userID){
+                media.push(element)
+            }
+        })
+        return media;
+    }
+
+    //Get User by UserID
+    getUser(data, userID){
+        let user = [];
+        data['photographers'].forEach(element => {
+            if (element.id == userID){
+                user.push(element)
+            }
+        })
+        return user;
+    }
+
+    //Read value form element
     verifiedElements() {
         console.clear();
         const form = document.querySelector('form');
