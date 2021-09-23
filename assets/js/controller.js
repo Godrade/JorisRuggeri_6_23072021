@@ -1,14 +1,14 @@
 let profil = new ProfilClass();
 let url = window.location.pathname;
 
-switch(url){
+switch (url) {
     case '/':
     case '/Formation/DFE/FishEye/':
         profil.getScrolling();
         profil.createIndexDynamicDom(profil.getJson());
         const tagList = document.querySelectorAll("button");
-        tagList.forEach((element) => element.addEventListener("click",() => profil.updateIndexDomForTag(element.id)));
-    break;
+        tagList.forEach((element) => element.addEventListener("click", () => profil.updateIndexDomForTag(element.id)));
+        break;
     case '/profil.html':
     case '/Formation/DFE/FishEye/profil.html':
         profil.createProfilDynamicDom(profil.getJson(), window.location.href.split('?id=')[1]);
@@ -17,19 +17,19 @@ switch(url){
         dropbtn.addEventListener('click', () => {
             document.getElementById("dropdown").classList.toggle("show");
         })
-        
-        window.onclick = function(e) {
+
+        window.onclick = function (e) {
             if (!e.target.matches('.dropbtn')) {
                 let dropdowns = document.getElementsByClassName("dropdown-content");
-              let i;
-              for (i = 0; i < dropdowns.length; i++) {
-                let openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                  openDropdown.classList.remove('show');
+                let i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    let openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
                 }
-              }
             }
-          }
+        }
 
         const orderByLike = document.getElementById('orderByLike');
         orderByLike.addEventListener('click', () => profil.createPortfolioElement(orderByLike.id, window.location.href.split('?id=')[1]));
@@ -54,30 +54,30 @@ switch(url){
         modalClose.forEach((btn) => btn.addEventListener("click", closeModal));
 
 
-        function launchModal() {
-            form.reset();
-            document.body.classList.add('open-modal');
-            form.style.display = "block";
-            modalbg.style.display = "block";
-        }
-    
-        function closeModal() {
-            document.body.classList.remove('open-modal');
-            modalbg.style.display = "none";
-        }
+    function launchModal() {
+        form.reset();
+        document.body.classList.add('open-modal');
+        form.style.display = "block";
+        modalbg.style.display = "block";
+    }
+
+    function closeModal() {
+        document.body.classList.remove('open-modal');
+        modalbg.style.display = "none";
+    }
 
         //Verified elements
-        function validate() {
-            profil.verifiedElements();
-        }
+    function validate() {
+        profil.verifiedElements();
+    }
 
         form.addEventListener("submit", function (e) {
             e.preventDefault();
             validate();
         });
         break;
-        default:
-            console.log("Error page not found");
+    default:
+        console.log("Error page not found");
 }
 
-console.log('Url is',url);
+console.log('Url is', url);

@@ -108,7 +108,7 @@ class ProfilClass {
         //Get User by ID
         let user = [];
         dataJson['photographers'].forEach(element => {
-            if (element.id == userID) {
+            if (element.id === parseInt(userID)) {
                 user.push(element)
             }
         })
@@ -137,21 +137,22 @@ class ProfilClass {
         this.createPortfolioElement(null, userID)
     }
 
+    //Create Element for portfolio and add value in element
     createPortfolioElement = async (sort = null, userID = null) => {
         let data = await this.getJson();
-        let media = this.getMedia(data, userID);
-        let user = this.getUser(data, userID);
+        let media = this.getMedia(data, parseInt(userID));
+        let user = this.getUser(data, parseInt(userID));
         let totalLike = 0;
         let spanLike = document.getElementById('totalLike');
 
-        if (sort == 'orderByLike') {
+        if (sort === 'orderByLike') {
             this.removedPortfolioItem();
             media.sort(function (a, b) {
                 return b.likes - a.likes;
             });
         }
 
-        if (sort == 'orderByName') {
+        if (sort === 'orderByName') {
             this.removedPortfolioItem();
             media.sort(function (x, y) {
                 let a = x.title.toUpperCase(),
@@ -160,7 +161,7 @@ class ProfilClass {
             });
         }
 
-        if (sort == 'orderByDate') {
+        if (sort === 'orderByDate') {
             this.removedPortfolioItem();
             console.log(media.sort(function (x, y) {
                 let a = new Date(x.date),
@@ -239,7 +240,7 @@ class ProfilClass {
     getMedia(data, userID) {
         let media = [];
         data['media'].forEach(element => {
-            if (element.photographerId == userID) {
+            if (element.photographerId === userID) {
                 media.push(element)
             }
         })
@@ -250,13 +251,14 @@ class ProfilClass {
     getUser(data, userID) {
         let user = [];
         data['photographers'].forEach(element => {
-            if (element.id == userID) {
+            if (element.id === userID) {
                 user.push(element)
             }
         })
         return user;
     }
 
+    //GetScrolling for display or not btn content
     getScrolling() {
         let btnContent = document.getElementById('btnContent')
         window.onscroll = function (e) {

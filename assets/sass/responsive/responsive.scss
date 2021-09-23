@@ -1,4 +1,13 @@
-@media screen and (max-width: map-get($breakpoints, xl)) {}
+@media screen and (max-width: map-get($breakpoints, xl)) {
+  .container {
+    margin: 0;
+
+    .portfolio {
+      column-gap: 20px;
+      justify-content: center;
+    }
+  }
+}
 
 @media screen and (max-width: map-get($breakpoints, lg)) {
   main {
@@ -8,11 +17,70 @@
       }
     }
   }
+
+  .profil {
+    .profil-info {
+      .user-name {
+        font-size: 45px;
+      }
+    }
+  }
 }
 
-@media screen and (max-width: map-get($breakpoints, md)) {}
+@media screen and (max-width: map-get($breakpoints, md)) {
+  .info-like-price {
+    display: none;
+  }
+
+  .profil {
+    .profil-info {
+
+      .user-name {
+        font-size: 30px;
+      }
+
+      .user-desc {
+        font-size: 13px;
+      }
+    }
+
+    .btn-contact {
+      position: fixed;
+      bottom: 8px;
+      left: 250px;
+      height: 36px;
+      padding: 0;
+    }
+
+    .user {
+      img {
+        width: 160px;
+        height: 160px;
+      }
+    }
+  }
+
+  .container {
+    .portfolio {
+      .portfolio-item {
+        width: 100%;
+
+        img, video {
+          width: 100%;
+          height: 300px;
+        }
+      }
+    }
+  }
+}
 
 @media screen and (max-width: map-get($breakpoints, sm)) {
+  header {
+    img {
+      width: 230px;
+    }
+  }
+
   main {
     .profil-user {
       .user-item {
@@ -20,6 +88,29 @@
       }
     }
   }
+
+  .profil {
+    padding: 0;
+    height: 230px;
+
+    .profil-info {
+      .user-name {
+        font-size: 20px;
+      }
+
+      .user-desc {
+        font-size: 10px;
+      }
+    }
+
+    .user {
+      img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
 }
 
-@media screen and (max-width: map-get($breakpoints, xs)) {}
+@media screen and (max-width: map-get($breakpoints, xs)) {
+}
