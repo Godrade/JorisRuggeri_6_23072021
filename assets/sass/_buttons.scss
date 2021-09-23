@@ -23,3 +23,14 @@
   margin-left: 10px;
   background-color: $red;
 }
+
+.btn-content {
+  @extend .btn;
+  display: none;
+  background-color: #DB8876;
+  color: black;
+  min-width: auto;
+  padding: 10px;
+  position: fixed;
+  top: 5px;
+}

@@ -1,15 +1,15 @@
-class ProfilClass  {
+class ProfilClass {
 
     //Recovery json data
-    getJson = async (tag = null) => { 
+    getJson = async (tag = null) => {
         const response = await fetch('assets/data/data.json')
         let data = await response.json();
 
         //Search tag list
         const arr = [];
-        if (tag){
+        if (tag) {
             data['photographers'].forEach(element => {
-                if(element.tags.includes(tag.toLowerCase())){
+                if (element.tags.includes(tag.toLowerCase())) {
                     arr.push(element);
                 }
             })
@@ -21,9 +21,11 @@ class ProfilClass  {
     createIndexDynamicDom = async (data, tag = false) => {
         data = await data;
 
-        if(tag){
+        if (tag) {
             let userDomItem = document.querySelectorAll('.user-item');
-            userDomItem.forEach(element => {document.getElementById(element.id).remove()})
+            userDomItem.forEach(element => {
+                document.getElementById(element.id).remove()
+            })
         }
 
         data['photographers'].forEach(element => {
@@ -31,48 +33,48 @@ class ProfilClass  {
 
             let divElt = document.createElement('div');
             divElt.className = 'user-item';
-            divElt.id = `user-item-${element.id}` 
-    
+            divElt.id = `user-item-${element.id}`
+
             let aElt = document.createElement('a');
             aElt.href = `profil.html?id=${element.id}`;
             aElt.id = `link-profil-${element.id}`;
-    
+
             let divAfterLink = document.createElement('div');
             divAfterLink.className = 'user';
             divAfterLink.id = `user-${element.id}`;
-    
+
             const link = element.name.split(' ');
             let imgElt = document.createElement('img');
             imgElt.src = `assets/profil/Photographers ID Photos/${element.portrait}`;
-    
+
             let pElt = document.createElement('p');
             pElt.textContent = element.name;
-    
+
             let divAfterUser = document.createElement('div');
             divAfterUser.className = "info-user";
             divAfterUser.id = `info-user-${element.id}`;
-    
+
             let pCity = document.createElement('p');
             pCity.className = 'city'
             pCity.textContent = element.city;
-    
+
             let pDesc = document.createElement('p');
             pDesc.className = 'description';
             pDesc.textContent = element.tagline;
-    
+
             let pPrice = document.createElement('p');
             pPrice.className = 'price'
             pPrice.textContent = `${element.price}€/j`;
-    
+
             let divBTag = document.createElement('div');
             divBTag.className = 'user-tag';
             divBTag.id = `user-tag-${element.id}`;
-    
+
             let divTag = document.createElement('div');
             divTag.id = `tag-${element.id}`;
             divTag.className = 'tag';
-        
-    
+
+
             document.getElementById("profil-user").appendChild(divElt);
             document.getElementById(`user-item-${element.id}`).appendChild(aElt);
             document.getElementById(`link-profil-${element.id}`).appendChild(divAfterLink);
@@ -84,7 +86,7 @@ class ProfilClass  {
             document.getElementById(`info-user-${element.id}`).appendChild(pPrice);
             document.getElementById(`link-profil-${element.id}`).appendChild(divBTag);
             document.getElementById(`user-tag-${element.id}`).appendChild(divTag);
-    
+
             element.tags.forEach(tag => {
                 let buttonTag = document.createElement('button');
                 buttonTag.textContent = tag;
@@ -97,7 +99,7 @@ class ProfilClass  {
     //Update indexDOM for Tag
     updateIndexDomForTag = async (tag) => {
         let data = await this.getJson(tag);
-        this.createIndexDynamicDom({'photographers' : data}, true);
+        this.createIndexDynamicDom({'photographers': data}, true);
     }
 
     createProfilDynamicDom = async (data, userID) => {
@@ -106,7 +108,7 @@ class ProfilClass  {
         //Get User by ID
         let user = [];
         dataJson['photographers'].forEach(element => {
-            if (element.id == userID){
+            if (element.id == userID) {
                 user.push(element)
             }
         })
@@ -117,10 +119,10 @@ class ProfilClass  {
         document.getElementById('city').textContent = user[0]['city'];
         document.getElementById('desc').textContent = user[0]['tagline'];
         document.getElementById('img-profil').src = `assets/profil/Photographers ID Photos/${user[0]['portrait']}`
+        document.getElementById('user-price').textContent = user[0]['price']
 
         let i = 0;
         user[0]['tags'].forEach(element => {
-            
             let divTag = document.createElement('div');
             divTag.id = `tag-${i}`;
             divTag.className = 'tag';
@@ -139,24 +141,28 @@ class ProfilClass  {
         let data = await this.getJson();
         let media = this.getMedia(data, userID);
         let user = this.getUser(data, userID);
+        let totalLike = 0;
+        let spanLike = document.getElementById('totalLike');
 
-        if(sort == 'orderByLike'){
+        if (sort == 'orderByLike') {
             this.removedPortfolioItem();
-            media.sort(function (a, b){return b.likes - a.likes;});
+            media.sort(function (a, b) {
+                return b.likes - a.likes;
+            });
         }
 
-        if(sort == 'orderByName'){
+        if (sort == 'orderByName') {
             this.removedPortfolioItem();
-            media.sort(function (x, y){
+            media.sort(function (x, y) {
                 let a = x.title.toUpperCase(),
-                b = y.title.toUpperCase();
+                    b = y.title.toUpperCase();
                 return a == b ? 0 : a > b ? 1 : -1;
             });
         }
 
-        if(sort == 'orderByDate'){
+        if (sort == 'orderByDate') {
             this.removedPortfolioItem();
-            console.log(media.sort(function (x, y){
+            console.log(media.sort(function (x, y) {
                 let a = new Date(x.date),
                     b = new Date(y.date);
                 return a - b;
@@ -167,21 +173,23 @@ class ProfilClass  {
         //Created DOM for media Elements
         let name = user[0]['name'].split(' ')[0].replace('-', ' ');
         media.forEach(element => {
+            totalLike = totalLike + element.likes;
+
             let divItem = document.createElement('div');
             divItem.className = 'portfolio-item';
             divItem.id = `item-${element.id}`;
 
-                let videoElt = document.createElement('video');
-                videoElt.setAttribute('controls', 'true');
-                videoElt.id = `video-${element.id}`
+            let videoElt = document.createElement('video');
+            videoElt.setAttribute('controls', 'true');
+            videoElt.id = `video-${element.id}`
 
-                let sourceElt = document.createElement('source');
-                sourceElt.src = `assets/profil/${name}/${element.video}`;
-                sourceElt.type = 'video/mp4';
+            let sourceElt = document.createElement('source');
+            sourceElt.src = `assets/profil/${name}/${element.video}`;
+            sourceElt.type = 'video/mp4';
 
-                let imageElt = document.createElement('img');
-                imageElt.src = `assets/profil/${name}/${element.image}`;
-                imageElt.alt = `Photo de ${user[0]['name']}`;
+            let imageElt = document.createElement('img');
+            imageElt.src = `assets/profil/${name}/${element.image}`;
+            imageElt.alt = `Photo de ${user[0]['name']}`;
 
             let divItemInfo = document.createElement('div');
             divItemInfo.className = 'profil-item-info';
@@ -195,11 +203,14 @@ class ProfilClass  {
             let pItemlike = document.createElement('p');
             pItemlike.className = "portfolio-name";
             pItemlike.id = `like-${element.id}`
-            pItemlike.textContent = `${element.likes} <3`;
+            pItemlike.textContent = `${element.likes} `;
+
+            let ilike = document.createElement('i');
+            ilike.className = 'fas fa-heart'
 
             document.getElementById("portfolio").appendChild(divItem);
-            
-            if (element.video){
+
+            if (element.video) {
                 document.getElementById(`item-${element.id}`).appendChild(videoElt);
                 document.getElementById(`video-${element.id}`).appendChild(sourceElt);
             } else {
@@ -209,22 +220,26 @@ class ProfilClass  {
             document.getElementById(`item-${element.id}`).appendChild(divItemInfo);
             document.getElementById(`info-${element.id}`).appendChild(pItemName);
             document.getElementById(`info-${element.id}`).appendChild(pItemlike);
+            document.getElementById(`like-${element.id}`).appendChild(ilike);
 
         })
+        spanLike.textContent = totalLike;
     }
 
     //Remove Dom element
-    removedPortfolioItem(){
+    removedPortfolioItem() {
         let portfolioDomItem = document.querySelectorAll('.portfolio-item');
-        portfolioDomItem.forEach(element => {document.getElementById(element.id).remove()})
+        portfolioDomItem.forEach(element => {
+            document.getElementById(element.id).remove()
+        })
     }
 
 
     //get Media by UserID
-    getMedia(data, userID){
+    getMedia(data, userID) {
         let media = [];
         data['media'].forEach(element => {
-            if (element.photographerId == userID){
+            if (element.photographerId == userID) {
                 media.push(element)
             }
         })
@@ -232,14 +247,27 @@ class ProfilClass  {
     }
 
     //Get User by UserID
-    getUser(data, userID){
+    getUser(data, userID) {
         let user = [];
         data['photographers'].forEach(element => {
-            if (element.id == userID){
+            if (element.id == userID) {
                 user.push(element)
             }
         })
         return user;
+    }
+
+    getScrolling() {
+        let btnContent = document.getElementById('btnContent')
+        window.onscroll = function (e) {
+            let distanceScrolled = document.documentElement.scrollTop;
+            if (distanceScrolled > 50) {
+                btnContent.style.display = 'block'
+            }
+            if (distanceScrolled < 50) {
+                btnContent.style.display = 'none'
+            }
+        }
     }
 
     //Read value form element

@@ -4,6 +4,7 @@ let url = window.location.pathname;
 switch(url){
     case '/':
     case '/Formation/DFE/FishEye/':
+        profil.getScrolling();
         profil.createIndexDynamicDom(profil.getJson());
         const tagList = document.querySelectorAll("button");
         tagList.forEach((element) => element.addEventListener("click",() => profil.updateIndexDomForTag(element.id)));
