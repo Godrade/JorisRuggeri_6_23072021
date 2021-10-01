@@ -24,75 +24,35 @@ class ProfilClass {
         if (tag) {
             let userDomItem = document.querySelectorAll('.user-item');
             userDomItem.forEach(element => {
+                console.log(element);
                 document.getElementById(element.id).remove()
             })
         }
 
-        data['photographers'].forEach(element => {
-            let i = element.id;
-
-            let divElt = document.createElement('div');
+        data.photographers.map((photographer) => {
+            const divSection = document.getElementById('profil-user');
+            const divElt = document.createElement('div');
             divElt.className = 'user-item';
-            divElt.id = `user-item-${element.id}`
+            divElt.id = `${photographer.id}`
 
-            let aElt = document.createElement('a');
-            aElt.href = `profil.html?id=${element.id}`;
-            aElt.id = `link-profil-${element.id}`;
+            const templatePage = `
+            <a href="profil.html?id=${photographer.id}" id="link-profil-${photographer.id}">
+                <div class="user" id="user-${photographer.id}">
+                    <img src="assets/profil/Photographers ID Photos/${photographer.portrait}">
+                    <p>${photographer.name}</p></div>
+                <div class="info-user" id="info-user-${photographer.id}"><p class="city">${photographer.city}</p>
+                    <p class="description">${photographer.tagline}</p>
+                    <p class="price">${photographer.price}€/j</p></div>
+                <div class="user-tag" id="user-tag-${photographer.id}">
+                    <div id="tag-${photographer.id}" class="tag">
+                        ${photographer.tags.map((tag) => `<button>#${tag}</button>`)}
+                    </div>
+                </div>
+            </a>
+            `;
 
-            let divAfterLink = document.createElement('div');
-            divAfterLink.className = 'user';
-            divAfterLink.id = `user-${element.id}`;
-
-            const link = element.name.split(' ');
-            let imgElt = document.createElement('img');
-            imgElt.src = `assets/profil/Photographers ID Photos/${element.portrait}`;
-
-            let pElt = document.createElement('p');
-            pElt.textContent = element.name;
-
-            let divAfterUser = document.createElement('div');
-            divAfterUser.className = "info-user";
-            divAfterUser.id = `info-user-${element.id}`;
-
-            let pCity = document.createElement('p');
-            pCity.className = 'city'
-            pCity.textContent = element.city;
-
-            let pDesc = document.createElement('p');
-            pDesc.className = 'description';
-            pDesc.textContent = element.tagline;
-
-            let pPrice = document.createElement('p');
-            pPrice.className = 'price'
-            pPrice.textContent = `${element.price}€/j`;
-
-            let divBTag = document.createElement('div');
-            divBTag.className = 'user-tag';
-            divBTag.id = `user-tag-${element.id}`;
-
-            let divTag = document.createElement('div');
-            divTag.id = `tag-${element.id}`;
-            divTag.className = 'tag';
-
-
-            document.getElementById("profil-user").appendChild(divElt);
-            document.getElementById(`user-item-${element.id}`).appendChild(aElt);
-            document.getElementById(`link-profil-${element.id}`).appendChild(divAfterLink);
-            document.getElementById(`user-${element.id}`).appendChild(imgElt);
-            document.getElementById(`user-${element.id}`).appendChild(pElt);
-            document.getElementById(`link-profil-${element.id}`).appendChild(divAfterUser);
-            document.getElementById(`info-user-${element.id}`).appendChild(pCity);
-            document.getElementById(`info-user-${element.id}`).appendChild(pDesc);
-            document.getElementById(`info-user-${element.id}`).appendChild(pPrice);
-            document.getElementById(`link-profil-${element.id}`).appendChild(divBTag);
-            document.getElementById(`user-tag-${element.id}`).appendChild(divTag);
-
-            element.tags.forEach(tag => {
-                let buttonTag = document.createElement('button');
-                buttonTag.textContent = tag;
-                document.getElementById(`tag-${element.id}`).appendChild(buttonTag);
-            })
-
+            divSection.appendChild(divElt);
+            divElt.innerHTML = templatePage;
         });
     }
 
@@ -129,7 +89,7 @@ class ProfilClass {
             document.getElementById(`user-tag`).appendChild(divTag);
 
             let buttonTag = document.createElement('button');
-            buttonTag.textContent = element;
+            buttonTag.textContent = `#${element}`;
             document.getElementById(`tag-${i}`).appendChild(buttonTag);
             i++;
         })
@@ -143,6 +103,7 @@ class ProfilClass {
         let media = this.getMedia(data, parseInt(userID));
         let user = this.getUser(data, parseInt(userID));
         let totalLike = 0;
+        let imgOrVideo = null;
         let spanLike = document.getElementById('totalLike');
 
         if (sort === 'orderByLike') {
@@ -173,58 +134,31 @@ class ProfilClass {
 
         //Created DOM for media Elements
         let name = user[0]['name'].split(' ')[0].replace('-', ' ');
-        media.forEach(element => {
-            totalLike = totalLike + element.likes;
 
-            let divItem = document.createElement('div');
-            divItem.className = 'portfolio-item';
-            divItem.id = `item-${element.id}`;
+        media.map((medias) => {
+            const divSection = document.getElementById('portfolio');
+            const divElt = document.createElement('div');
+            divElt.className = 'portfolio-item';
+            divElt.id = `${medias.id}`
 
-            let videoElt = document.createElement('video');
-            videoElt.setAttribute('controls', 'true');
-            videoElt.id = `video-${element.id}`
+            totalLike = totalLike + medias.likes;
 
-            let sourceElt = document.createElement('source');
-            sourceElt.src = `assets/profil/${name}/${element.video}`;
-            sourceElt.type = 'video/mp4';
+            if (medias.image){imgOrVideo = `<img src="assets/profil/${name}/${medias.image}" alt="Photo de Mimi Keel"></img>`}
+            if (medias.video){imgOrVideo = `<video><source src="assets/profil/${name}/${medias.video}" type="video/mp4"></source></video>`}
 
-            let imageElt = document.createElement('img');
-            imageElt.src = `assets/profil/${name}/${element.image}`;
-            imageElt.alt = `Photo de ${user[0]['name']}`;
-
-            let divItemInfo = document.createElement('div');
-            divItemInfo.className = 'profil-item-info';
-            divItemInfo.id = `info-${element.id}`
-
-            let pItemName = document.createElement('p');
-            pItemName.className = "portfolio-name";
-            pItemName.id = `name-${element.id}`
-            pItemName.textContent = element.title;
-
-            let pItemlike = document.createElement('p');
-            pItemlike.className = "portfolio-name";
-            pItemlike.id = `like-${element.id}`
-            pItemlike.textContent = `${element.likes} `;
-
-            let ilike = document.createElement('i');
-            ilike.className = 'fas fa-heart'
-
-            document.getElementById("portfolio").appendChild(divItem);
-
-            if (element.video) {
-                document.getElementById(`item-${element.id}`).appendChild(videoElt);
-                document.getElementById(`video-${element.id}`).appendChild(sourceElt);
-            } else {
-                document.getElementById(`item-${element.id}`).appendChild(imageElt);
-            }
-
-            document.getElementById(`item-${element.id}`).appendChild(divItemInfo);
-            document.getElementById(`info-${element.id}`).appendChild(pItemName);
-            document.getElementById(`info-${element.id}`).appendChild(pItemlike);
-            document.getElementById(`like-${element.id}`).appendChild(ilike);
-
+            const templatePage = `
+            <div class="portfolio-item" id="item-${medias.id}">
+	            ${imgOrVideo}
+	            <div class="profil-item-info" id="info-${medias.id}">
+		            <p class="portfolio-name" id="name-${medias.id}">${medias.title}</p>
+		            <p class="portfolio-name" id="like-${medias.id}">${medias.likes} <i class="fas fa-heart"></i></p>
+	            </div>
+            </div>`;
+        
+            divSection.appendChild(divElt);
+            divElt.innerHTML = templatePage;
+            spanLike.textContent = totalLike;
         })
-        spanLike.textContent = totalLike;
     }
 
     //Remove Dom element
