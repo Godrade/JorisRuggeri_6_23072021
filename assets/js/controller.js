@@ -1,17 +1,39 @@
 let profil = new ProfilClass();
 let url = window.location.pathname;
 
-switch (url) {
-    case '/':
-    case '/Formation/DFE/FishEye/':
-        profil.getScrolling();
-        profil.createIndexDynamicDom(profil.getJson());
+import { Data } from "./class/data";
+import { HomePage } from "./class/homePage";
+import { FilterTags } from "./class/FilterTags";
+import { Photographer } from "./class/photographer";
+import { ProfilClass } from "./class/ProfilClass";
+import { Modal } from "./class/modal";
+import { Form } from "./class/form";
+
+//Factory
+import { ImageFactory } from "./factory/ImageFactory"
+
+(async function init () {
+    const data = await new Data().getJson();
+
+    if(url === "/" || url === "/Formation/DFE/FishEye/"){
+        new HomePage().create(data);
+
+        //Call filterTag
         const tagList = document.querySelectorAll("button");
-        tagList.forEach((element) => element.addEventListener("click", () => profil.updateIndexDomForTag(element.id)));
-        break;
-    case '/profil.html':
-    case '/Formation/DFE/FishEye/profil.html':
-        profil.createProfilDynamicDom(profil.getJson(), window.location.href.split('?id=')[1]);
+        tagList.forEach((filterTag) => filterTag.addEventListener("click", () => new FilterTags().filter(filterTag.id, data)));
+    } else {
+        new Photographer().create(data);
+        new ImageFactory().image(true);
+
+        //BUG MODAL
+        
+
+        
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            this.validate();
+        });
+
 
         const dropbtn = document.getElementById('dropbtn');
         dropbtn.addEventListener('click', () => {
@@ -39,45 +61,5 @@ switch (url) {
 
         const orderByDate = document.getElementById('orderByDate');
         orderByDate.addEventListener('click', () => profil.createPortfolioElement(orderByDate.id, window.location.href.split('?id=')[1]));
-
-        // DOM Elements
-        const modalbg = document.querySelector(".bground");
-        const modalBtn = document.querySelectorAll(".modal-btn");
-        const form = document.getElementById("form");
-
-        // launch modal event
-        modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-        //Close modal
-        const modalClose = document.querySelectorAll(".close");
-        const btnModalClose = document.getElementById("close-modal");
-        modalClose.forEach((btn) => btn.addEventListener("click", closeModal));
-
-
-    function launchModal() {
-        form.reset();
-        document.body.classList.add('open-modal');
-        form.style.display = "block";
-        modalbg.style.display = "block";
     }
-
-    function closeModal() {
-        document.body.classList.remove('open-modal');
-        modalbg.style.display = "none";
-    }
-
-        //Verified elements
-    function validate() {
-        profil.verifiedElements();
-    }
-
-        form.addEventListener("submit", function (e) {
-            e.preventDefault();
-            validate();
-        });
-        break;
-    default:
-        console.log("Error page not found");
-}
-
-console.log('Url is', url);
+})()

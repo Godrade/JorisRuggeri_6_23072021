@@ -1,4 +1,4 @@
-class ProfilClass {
+export class ProfilClass {
 
     //Recovery json data
     getJson = async (tag = null) => {
@@ -45,7 +45,7 @@ class ProfilClass {
                     <p class="price">${photographer.price}€/j</p></div>
                 <div class="user-tag" id="user-tag-${photographer.id}">
                     <div id="tag-${photographer.id}" class="tag">
-                        ${photographer.tags.map((tag) => `<button>#${tag}</button>`)}
+                        ${photographer.tags.map((tag) => `<button>#${tag}</button>`).join("")}
                     </div>
                 </div>
             </a>
@@ -124,11 +124,11 @@ class ProfilClass {
 
         if (sort === 'orderByDate') {
             this.removedPortfolioItem();
-            console.log(media.sort(function (x, y) {
+            media.sort(function (x, y) {
                 let a = new Date(x.date),
                     b = new Date(y.date);
                 return a - b;
-            }));
+            });
         }
 
 

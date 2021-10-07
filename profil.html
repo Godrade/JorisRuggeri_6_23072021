@@ -19,20 +19,7 @@
         <p><span id="totalLike"></span> <i class="fas fa-heart"></i></p>
         <p><span id="user-price"></span>€/jour</p>
     </div>
-    <section class="container profil">
-        <div class="content-user">
-            <div class="profil-info">
-                <h1 class="user-name" id="name"></h1>
-                <p class="user-city" id="city"></p>
-                <p class="user-desc" id="desc"></p>
-                <div class="user-tag" id="user-tag"></div>
-                <button class="btn btn-contact modal-btn">Contactez-moi</button>
-            </div>
-            <div class="user">
-                <img alt="Image de profil" id="img-profil">
-            </div>
-        </div>
-    </section>
+    <section class="container profil" id="profil"></section>
     <section class="container">
         <div class="content-dropdown">
             <p>Trier par</p>
@@ -49,7 +36,7 @@
     </section>
 
     <!-- MODAL -->
-    <div class="bground">
+    <div class="bground" id="bground">
         <div class="content">
             <span class="close"></span>
             <div class="modal-body">
@@ -83,7 +70,7 @@
         </div>
     </div>
 </main>
-<script src="assets/js/ProfilClass.js"></script>
-<script src="assets/js/controller.js"></script>
+<!--<script src="assets/js/ProfilClass.js"></script>-->
+<script src="assets/js/controller.js" type="module"></script>
 </body>
 </html>
