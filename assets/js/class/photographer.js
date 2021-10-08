@@ -24,7 +24,14 @@ export class Photographer {
 
         document.getElementById('profil').innerHTML = templatePage;
 
-        new Modal().init();
-        //Call Galery
+        //Event for modal
+        this.callEvents();
+    };
+
+    callEvents(){
+        const modalBtn = document.getElementById('modal-btn');
+        modalBtn.addEventListener('click', function () {
+            new Modal().modal({ open: true });
+        })
     }
 }

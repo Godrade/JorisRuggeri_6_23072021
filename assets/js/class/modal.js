@@ -1,31 +1,34 @@
-const modalBtn = document.getElementById("modal-btn");
-const modalbg = document.getElementById("bground");
-
 export class Modal {
 
-    init(){
-        // launch modal event
-        console.log(modalBtn, modalbg);
-        if(modalBtn){
-            modalBtn.addEventListener("click", this.launchModal)
-        }
-        
+    constructor(){
+        this.modalbg = document.getElementById("bground");
+    }
 
-        //Close modal
-        const modalClose = document.querySelectorAll(".close");
-        const btnModalClose = document.getElementById("close-modal");
-        modalClose.forEach((btn) => btn.addEventListener("click", this.closeModal));
+    modal({ open }){
+        if(open){
+            this.launchModal();
+            this.eventBtn();
+        } else {
+            this.closeModal();
+        }
     }
 
     launchModal() {
         this.modalbg.style.display = "block";
-        // document.body.classList.add('open-modal');
-        // this.form.style.display = "block";
-        // this.modalbg.style.display = "block";
     }
 
     closeModal() {
         document.body.classList.remove('open-modal');
-        modalbg.style.display = "none";
+        this.modalbg.style.display = "none";
+    }
+
+    eventBtn(){
+        const modalClose = document.querySelectorAll('.close');
+        const btnModalClose = document.getElementById('close-modal');
+        modalClose.forEach((btn) =>{
+            btn.addEventListener('click', () => {
+                this.modal({ open: false });
+            });
+        });
     }
 }
