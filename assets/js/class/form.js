@@ -1,4 +1,12 @@
 export class Form {
+    init(){
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            console.log(e);
+            this.verifiedElements();
+        });
+    }
+
     //Read value form element
     verifiedElements() {
         console.clear();

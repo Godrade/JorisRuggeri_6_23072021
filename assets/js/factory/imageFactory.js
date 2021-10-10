@@ -1,12 +1,5 @@
 export class ImageFactory{
-    image(nom){
-    
-        function test(){
-            console.log(nom);
-        }
-
-        return {
-            nom : nom,
-        }
+    createElt(src, alt){
+        return `<img src="${src}" alt="${alt}"></img>`
     }
 }

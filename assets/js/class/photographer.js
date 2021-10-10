@@ -1,10 +1,8 @@
 import { Modal } from "./modal";
 export class Photographer {
     create = (data) => {
-        const userID = window.location.href.split('?id=')[1];
-
-        //Get User by ID
-        const user = data.photographers.find(photographer => photographer.id === Number(userID));
+        const user = this.getUser(data);
+        
         const templatePage = `
             <div class="content-user">
                 <div class="profil-info">
@@ -23,8 +21,11 @@ export class Photographer {
         `;
 
         document.getElementById('profil').innerHTML = templatePage;
+        document.getElementById('contact-name').textContent = user.name;
+        document.getElementById('user-price').textContent = user.price;
+        document.getElementById('totalLike').textContent = this.getTotalLike(data, user.id);
 
-        //Event for modal
+        //Call Events
         this.callEvents();
     };
 
@@ -33,5 +34,20 @@ export class Photographer {
         modalBtn.addEventListener('click', function () {
             new Modal().modal({ open: true });
         })
+    }
+
+    getTotalLike(data, userID){
+        let totalLike = 0;
+        data.media.map((medias) => {
+            if (medias.photographerId === userID) {
+                totalLike = totalLike + medias.likes;
+            }
+        })
+        return totalLike;
+    }
+
+    getUser(data){
+        const userID = window.location.href.split('?id=')[1];
+        return data.photographers.find(photographer => photographer.id === Number(userID));
     }
 }

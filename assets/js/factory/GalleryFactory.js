@@ -1,16 +1,25 @@
-class Galery {
-        create(params) {
-            media.map((medias) => {
+import { ImageFactory } from "./ImageFactory";
+import { VideoFactory } from "./videoFactory";
+
+export class GaleryFactory {
+    create(data, user) {
+        let imgOrVideo;
+        const name = user.name.split(' ')[0].replace('-', ' ');
+
+        data.media.map((medias) => {
+            if (medias.photographerId === user.id) {
                 const divSection = document.getElementById('portfolio');
                 const divElt = document.createElement('div');
                 divElt.className = 'portfolio-item';
                 divElt.id = `${medias.id}`
-    
-                totalLike = totalLike + medias.likes;
-    
-                if (medias.image){imgOrVideo = `<img src="assets/profil/${name}/${medias.image}" alt="Photo de Mimi Keel"></img>`}
-                if (medias.video){imgOrVideo = `<video><source src="assets/profil/${name}/${medias.video}" type="video/mp4"></source></video>`}
-    
+                //Image + Video Factory
+                if (medias.image){
+                    imgOrVideo = new ImageFactory().createElt(`assets/profil/${name}/${medias.image}`, 'Alt');
+                }
+                if (medias.video){
+                    imgOrVideo = new VideoFactory().createElt(`assets/profil/${name}/${medias.video}`);
+                }
+        
                 const templatePage = `
                 <div class="portfolio-item" id="item-${medias.id}">
                     ${imgOrVideo}
@@ -19,10 +28,10 @@ class Galery {
                         <p class="portfolio-name" id="like-${medias.id}">${medias.likes} <i class="fas fa-heart"></i></p>
                     </div>
                 </div>`;
-            
+                
                 divSection.appendChild(divElt);
                 divElt.innerHTML = templatePage;
-                spanLike.textContent = totalLike;
-            })
-        }
+            }
+        })
+    }
 }

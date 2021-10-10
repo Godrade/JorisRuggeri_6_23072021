@@ -6,10 +6,10 @@ import { HomePage } from "./class/homePage";
 import { FilterTags } from "./class/FilterTags";
 import { Photographer } from "./class/photographer";
 import { ProfilClass } from "./class/ProfilClass";
-import { Modal } from "./class/modal";
 import { Form } from "./class/form";
 
 //Factory
+import { GaleryFactory } from "./factory/GalleryFactory";
 import { ImageFactory } from "./factory/ImageFactory"
 
 (async function init () {
@@ -17,24 +17,14 @@ import { ImageFactory } from "./factory/ImageFactory"
 
     if(url === "/" || url === "/Formation/DFE/FishEye/"){
         new HomePage().create(data);
-
-        //Call filterTag
-        const tagList = document.querySelectorAll("button");
-        tagList.forEach((filterTag) => filterTag.addEventListener("click", () => new FilterTags().filter(filterTag.id, data)));
+        new FilterTags().init(data);
     } else {
+        const user = new Photographer().getUser(data);
         new Photographer().create(data);
-        new ImageFactory().image(true);
+        new GaleryFactory().create(data, user);
+        new Form().init();
 
-        //BUG MODAL
-        
-
-        
-        form.addEventListener("submit", function (e) {
-            e.preventDefault();
-            this.validate();
-        });
-
-
+        //PAS ICI (DropBtnClass)
         const dropbtn = document.getElementById('dropbtn');
         dropbtn.addEventListener('click', () => {
             document.getElementById("dropdown").classList.toggle("show");
@@ -54,12 +44,12 @@ import { ImageFactory } from "./factory/ImageFactory"
         }
 
         const orderByLike = document.getElementById('orderByLike');
-        orderByLike.addEventListener('click', () => profil.createPortfolioElement(orderByLike.id, window.location.href.split('?id=')[1]));
+        orderByLike.addEventListener('click', () => profil.createPortfolioElement(orderByLike.id, user.id));
 
         const orderByName = document.getElementById('orderByName');
-        orderByName.addEventListener('click', () => profil.createPortfolioElement(orderByName.id, window.location.href.split('?id=')[1]));
+        orderByName.addEventListener('click', () => profil.createPortfolioElement(orderByName.id,user.id));
 
         const orderByDate = document.getElementById('orderByDate');
-        orderByDate.addEventListener('click', () => profil.createPortfolioElement(orderByDate.id, window.location.href.split('?id=')[1]));
+        orderByDate.addEventListener('click', () => profil.createPortfolioElement(orderByDate.id, user.id));
     }
 })()
