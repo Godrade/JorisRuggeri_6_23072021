@@ -1,8 +1,7 @@
 export class Form {
     init(){
-        form.addEventListener("submit", function (e) {
+        form.addEventListener("submit", (e) => {
             e.preventDefault();
-            console.log(e);
             this.verifiedElements();
         });
     }

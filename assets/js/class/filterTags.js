@@ -1,5 +1,5 @@
 export class FilterTags {
-    init(data){
+    callEvents(data){
         const tagList = document.querySelectorAll("button");
         tagList.forEach((filterTag) => filterTag.addEventListener("click", () => this.filter(filterTag.id, data)));
     }

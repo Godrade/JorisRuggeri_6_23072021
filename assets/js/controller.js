@@ -10,14 +10,13 @@ import { Form } from "./class/form";
 
 //Factory
 import { GaleryFactory } from "./factory/GalleryFactory";
-import { ImageFactory } from "./factory/ImageFactory"
 
 (async function init () {
     const data = await new Data().getJson();
 
     if(url === "/" || url === "/Formation/DFE/FishEye/"){
         new HomePage().create(data);
-        new FilterTags().init(data);
+        new FilterTags().callEvents(data);
     } else {
         const user = new Photographer().getUser(data);
         new Photographer().create(data);
