@@ -1,5 +1,5 @@
 export class VideoFactory{
-    createElt(src){
-        return `<video><source src="${src}" type="video/mp4"></source></video>`
+    createElt(element, name){
+        return `<video><source src="assets/profil/${name}/${element.video}" type="video/mp4"></source></video>`
     }
 }

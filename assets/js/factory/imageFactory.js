@@ -1,5 +1,5 @@
 export class ImageFactory{
-    createElt(src, alt){
-        return `<img src="${src}" alt="${alt}" />`
+    createElt(element, name){
+        return `<img src="assets/profil/${name}/${element.image}" alt="${element.alt}"/>`
     }
 }
