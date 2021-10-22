@@ -1,5 +1,5 @@
 import { ImageFactory } from "./ImageFactory";
-import { VideoFactory } from "./videoFactory";
+import { VideoFactory } from "./VideoFactory";
 
 export class MediaFactory {
     render(element, name){

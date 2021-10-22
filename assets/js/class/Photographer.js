@@ -1,4 +1,4 @@
-import { Modal } from "./modal";
+import { Modal } from "./Modal";
 export class Photographer {
     create = (data) => {
         const user = this.getUser(data);
