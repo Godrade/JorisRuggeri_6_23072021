@@ -4,7 +4,6 @@ import { Carousel } from "../class/Carousel";
 export class GaleryFactory {
     create(medias, user) {
         const name = user.name.split(' ')[0].replace('-', ' ');
-        const mediaFactory = new MediaFactory();
 
         medias.map((media) => {
                 const divSection = document.getElementById('portfolio');
@@ -12,10 +11,10 @@ export class GaleryFactory {
                 divElt.className = 'portfolio-item';
                 divElt.id = `${media.id}`
 
-                const mediaHTML = mediaFactory.render(media, name)
+                const mediaHTML = new MediaFactory().render(media, name)
         
                 const templatePage = `
-                <div class="portfolio-item" id="item-${media.id}" data-id="${media.id}">
+                <div class="portfolio-item media" id="item-${media.id}" data-id="${media.id}">
                     ${mediaHTML}
                     <div class="profil-item-info" id="info-${media.id}">
                         <p class="portfolio-name" id="name-${media.id}">${media.title}</p>
@@ -27,14 +26,14 @@ export class GaleryFactory {
                 divElt.innerHTML = templatePage;
         })
 
-        this.callEvents();
+        this.callEvents(medias);
         
     }
 
-    callEvents(){
-        const carousel = document.querySelectorAll('.portfolio-item');
-        carousel.forEach(elt => elt.addEventListener('click', () => {
-            return new Carousel().init(elt.getAttribute('data-id'));
+    callEvents(medias){
+        const carousel = document.querySelectorAll('.media');
+        carousel.forEach(elt => elt.addEventListener('click', function (e) {
+            new Carousel().init(elt.getAttribute('data-id'), medias);
         }, false));
     }
 }
