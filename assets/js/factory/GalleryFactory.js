@@ -26,14 +26,14 @@ export class GaleryFactory {
                 divElt.innerHTML = templatePage;
         })
 
-        this.callEvents(medias);
+        this.callEvents(medias, name);
         
     }
 
-    callEvents(medias){
+    callEvents(medias, name){
         const carousel = document.querySelectorAll('.media');
         carousel.forEach(elt => elt.addEventListener('click', function (e) {
-            new Carousel().init(elt.getAttribute('data-id'), medias);
+            new Carousel().init(elt.getAttribute('data-id'), medias, name);
         }, false));
     }
 }

@@ -1,10 +1,11 @@
 import { MediaFactory } from "../factory/MediaFactory";
 export class Carousel {
 
-    init(id, medias){
-        let media;
+    init(id, medias, name){
+        const modal = document.getElementById('carousel');
+        const carousel = document.getElementById('media-carousel');
+        let index;
         let mediaLenght = medias.length -1
-        let alpha = document.getElementById('imgtest');
         Array.prototype.indexOfField = function (propertyName, value) {
             for (var i = 0; i < this.length; i++)
                 if (this[i][propertyName] === value)
@@ -12,26 +13,52 @@ export class Carousel {
             return -1;
         }
 
-        media = medias.indexOfField('id', Number(id))
-        alpha.innerHTML = this.update(medias[media], 'Mimi');
+        index = medias.indexOfField('id', Number(id))
+        this.update(medias[index], name)
+        this.callEvents(index, mediaLenght, name, medias);
+
+        modal.style.display = 'block'
+        document.getElementById('close-modal').addEventListener('click', (e) => {
+            modal.style.display = 'none';
+        })
+    }
+
+    callEvents(index, mediaLenght, name, medias){
+        
+        const cLeft = document.getElementById('chevron-left');
+        const cRight = document.getElementById('chevron-right');
+
 
         window.addEventListener('keydown', (e) => {
-            if(e.key === 'ArrowRight'){
-                media = this.next(mediaLenght, media);
-                console.log(`Index: ${media}/${mediaLenght}`);
-                alpha.innerHTML = this.update(medias[media], 'Mimi');
+            if(e.key === 'ArrowLeft'){
+                index = this.before(mediaLenght, index);
+                console.log(`Index: ${index}/${mediaLenght}`);
+                this.update(medias[index], name)
             }
 
-            if(e.key === 'ArrowLeft'){
-                media = this.before(mediaLenght, media);
-                console.log(`Index: ${media}/${mediaLenght}`);
-                alpha.innerHTML = this.update(medias[media], 'Mimi');
+            if(e.key === 'ArrowRight'){
+                index = this.next(mediaLenght, index);
+                console.log(`Index: ${index}/${mediaLenght}`);
+                this.update(medias[index], name)
             }
-          }, false);
+        }, false);
+
+        cLeft.addEventListener('click', (e) => {
+            index = this.before(mediaLenght, index);
+            console.log(`Index: ${index}/${mediaLenght}`);
+            this.update(medias[index], name)
+        })
+
+        cRight.addEventListener('click', (e) => {
+            index = this.next(mediaLenght, index);
+            console.log(`Index: ${index}/${mediaLenght}`);
+            this.update(medias[index], name)
+        })
     }
 
     update(media, name){
-        return new MediaFactory().render(media, name)
+        const carousel = document.getElementById('media-carousel');
+        carousel.innerHTML = new MediaFactory().render(media, name)
     }
 
     next(arrayLenght, index){
