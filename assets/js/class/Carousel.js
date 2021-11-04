@@ -1,83 +1,64 @@
 import { MediaFactory } from "../factory/MediaFactory";
 export class Carousel {
 
-    init(id, medias, name){
-        const modal = document.getElementById('carousel');
-        const carousel = document.getElementById('media-carousel');
-        let index;
-        let mediaLenght = medias.length -1
-        Array.prototype.indexOfField = function (propertyName, value) {
-            for (var i = 0; i < this.length; i++)
-                if (this[i][propertyName] === value)
-                    return i;
-            return -1;
-        }
+    constructor(id, medias, name){
+        this.id = id;
+        this.medias = medias;
+        this.name = name;
 
-        index = medias.indexOfField('id', Number(id))
-        this.update(medias[index], name)
-        this.callEvents(index, mediaLenght, name, medias);
+        this.index = medias.findIndex((element) => element.id === Number(id))
+        this.mediaLenght = medias.length -1
 
-        modal.style.display = 'block'
-        document.getElementById('close-modal').addEventListener('click', (e) => {
-            modal.style.display = 'none';
-        })
+        this.cLeft = document.getElementById('chevron-left');
+        this.cRight = document.getElementById('chevron-right');
+        this.modal = document.getElementById('carousel');
+        this.carousel = document.getElementById('media-carousel');
+        this.carouselTitle = document.getElementById('carousel-media-name');
+
+        this.update();
+        this.callEvents();
     }
 
-    callEvents(index, mediaLenght, name, medias){
-        
-        const cLeft = document.getElementById('chevron-left');
-        const cRight = document.getElementById('chevron-right');
-
+    callEvents(){
+        this.modal.style.display = 'block'
+        document.getElementById('close-modal').addEventListener('click', (e) => {
+            this.modal.style.display = 'none';
+        })
 
         window.addEventListener('keydown', (e) => {
             if(e.key === 'ArrowLeft'){
-                index = this.before(mediaLenght, index);
-                console.log(`Index: ${index}/${mediaLenght}`);
-                this.update(medias[index], name)
+                this.index = this.before();
+                this.update()
             }
 
             if(e.key === 'ArrowRight'){
-                index = this.next(mediaLenght, index);
-                console.log(`Index: ${index}/${mediaLenght}`);
-                this.update(medias[index], name)
+                this.index = this.next();
+                this.update()
             }
         }, false);
 
-        cLeft.addEventListener('click', (e) => {
-            index = this.before(mediaLenght, index);
-            console.log(`Index: ${index}/${mediaLenght}`);
-            this.update(medias[index], name)
+        this.cLeft.addEventListener('click', (e) => {
+            this.index = this.before();
+            this.update()
         })
 
-        cRight.addEventListener('click', (e) => {
-            index = this.next(mediaLenght, index);
-            console.log(`Index: ${index}/${mediaLenght}`);
-            this.update(medias[index], name)
+        this.cRight.addEventListener('click', (e) => {
+            this.index = this.next();
+            this.update()
         })
     }
 
-    update(media, name){
-        const carousel = document.getElementById('media-carousel');
-        carousel.innerHTML = new MediaFactory().render(media, name)
+    update(){
+        let currentMedias = this.medias[this.index];
+        this.carousel.innerHTML = new MediaFactory().render(currentMedias, this.name)
+        this.carouselTitle.textContent = currentMedias.title;
     }
 
-    next(arrayLenght, index){
-        if (index >= arrayLenght){
-            index = 0;
-        } else {
-            index = index +1;
-        }
-
-        return index;
+    next(){
+        return this.index >= this.mediaLenght ? 0 : this.index +1;
     }
 
-    before(arrayLenght, index){
-        if (index <= 0){
-            index = arrayLenght;
-        } else {
-            index = index -1;
-        }
-
-        return index;
+    before(){
+        return this.index <= 0 ? this.mediaLenght : this.index -1;
     }
 }

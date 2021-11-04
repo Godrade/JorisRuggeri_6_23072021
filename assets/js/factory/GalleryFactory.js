@@ -14,11 +14,11 @@ export class GaleryFactory {
                 const mediaHTML = new MediaFactory().render(media, name)
         
                 const templatePage = `
-                <div class="portfolio-item media" id="item-${media.id}" data-id="${media.id}">
+                <div class="portfolio-item" id="item-${media.id}">
                     ${mediaHTML}
                     <div class="profil-item-info" id="info-${media.id}">
                         <p class="portfolio-name" id="name-${media.id}">${media.title}</p>
-                        <p class="portfolio-name" id="like-${media.id}">${media.likes} <i class="fas fa-heart"></i></p>
+                        <p class="portfolio-name">${media.likes} <i class="far fa-heart" id="like-${media.id}"></i></p>
                     </div>
                 </div>`;
                 
@@ -33,7 +33,7 @@ export class GaleryFactory {
     callEvents(medias, name){
         const carousel = document.querySelectorAll('.media');
         carousel.forEach(elt => elt.addEventListener('click', function (e) {
-            new Carousel().init(elt.getAttribute('data-id'), medias, name);
+            new Carousel(elt.getAttribute('data-id'), medias, name);
         }, false));
     }
 }
