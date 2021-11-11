@@ -29,7 +29,7 @@ a {
 .tag {
   display: inline-flex;
 
-  button {
+  span {
     background-color: transparent;
     border-radius: 20px;
     border: 1px solid $grey;
@@ -85,7 +85,7 @@ main {
 
       .user-tag {
         .tag {
-          button {
+          span {
             font-size: 12px;
           }
         }

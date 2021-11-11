@@ -10,7 +10,7 @@ export class Photographer {
                     <p class="user-city" id="city">${user.city}</p>
                     <p class="user-desc" id="desc">${user.tagline}</p>
                     <div class="user-tag" id="user-tag">
-                    ${user.tags.map((tag) => `<div class="tag"><button>#${tag}</button></div>`).join("")}
+                    ${user.tags.map((tag) => `<div class="tag"><span>#${tag}</span></div>`).join("")}
                     </div>
                     <button class="btn btn-contact" id="modal-btn">Contactez-moi</button>
                 </div>

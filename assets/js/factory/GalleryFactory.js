@@ -18,7 +18,7 @@ export class GaleryFactory {
                     ${mediaHTML}
                     <div class="profil-item-info" id="info-${media.id}">
                         <p class="portfolio-name" id="name-${media.id}">${media.title}</p>
-                        <p class="portfolio-name">${media.likes} <i class="far fa-heart" id="like-${media.id}"></i></p>
+                        <p class="portfolio-name"><span class="like-number">${media.likes}</span> <i class="far fa-heart like-icon" id="like-${media.id}"></i></p>
                     </div>
                 </div>`;
                 
@@ -34,6 +34,11 @@ export class GaleryFactory {
         const carousel = document.querySelectorAll('.media');
         carousel.forEach(elt => elt.addEventListener('click', function (e) {
             new Carousel(elt.getAttribute('data-id'), medias, name);
+        }, false));
+
+        const like = document.querySelectorAll('.like-icon');
+        like.forEach(elt => elt.addEventListener('click', function (e) {
+            console.log(e.target.classList[0]);
         }, false));
     }
 }
