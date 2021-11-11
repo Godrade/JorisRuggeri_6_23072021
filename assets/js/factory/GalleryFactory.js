@@ -18,7 +18,7 @@ export class GaleryFactory {
                     ${mediaHTML}
                     <div class="profil-item-info" id="info-${media.id}">
                         <p class="portfolio-name" id="name-${media.id}">${media.title}</p>
-                        <p class="portfolio-name"><span class="like-number">${media.likes}</span> <i class="far fa-heart like-icon" id="like-${media.id}"></i></p>
+                        <p class="portfolio-name"><span class="like-number" id="like-${media.id}">${media.likes}</span> <i class="far fa-heart like-icon" data-id="${media.id}" id="heart-${media.id}"></i></p>
                     </div>
                 </div>`;
                 
@@ -38,7 +38,25 @@ export class GaleryFactory {
 
         const like = document.querySelectorAll('.like-icon');
         like.forEach(elt => elt.addEventListener('click', function (e) {
-            console.log(e.target.classList[0]);
+            let gLike = document.getElementById('totalLike');
+            let iLike = document.getElementById(`heart-${elt.getAttribute('data-id')}`);
+            let like = document.getElementById(`like-${elt.getAttribute('data-id')}`);
+            let nLike = Number(like.textContent);
+            let gnLike = Number(gLike.textContent);
+
+            if(iLike.classList.contains('far')){
+                console.log(1);
+                iLike.classList.add('fas');
+                iLike.classList.remove('far');
+                like.textContent = nLike + 1;
+                gLike.textContent = gnLike + 1;
+            } else {
+                console.log(2);
+                iLike.classList.add('far');
+                iLike.classList.remove('fas');
+                like.textContent = nLike - 1;
+                gLike.textContent = gnLike - 1;
+            }
         }, false));
     }
 }
