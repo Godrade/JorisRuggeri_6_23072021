@@ -6,6 +6,10 @@ body {
   margin: 0;
 }
 
+.p-relative {
+  position: relative;
+}
+
 .text-bold {
   font-weight: bold;
 }
@@ -143,6 +147,7 @@ main {
   background: $grey-light;
 
   .profil-info {
+    width: 49%;
     margin-top: auto;
     margin-bottom: auto;
     display: inline-block;

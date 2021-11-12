@@ -7,6 +7,17 @@
 }
 
 .btn-contact {
+  background-color: #901c1c;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  font-weight: 700;
+  font-size: 20px;
+  top: 0;
+  right: 0;
+}
+
+/*.btn-contact {
   background-color: $red;
   border: none;
   cursor: pointer;
@@ -15,7 +26,7 @@
   font-size: 20px;
   bottom: 165px;
   left: 390px;
-}
+}*/
 
 .btn-dropdown {
   @extend .btn;

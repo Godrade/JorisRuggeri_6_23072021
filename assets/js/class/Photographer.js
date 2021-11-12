@@ -6,19 +6,22 @@ export class Photographer {
         const templatePage = `
             <div class="content-user">
                 <div class="profil-info">
-                    <h1 class="user-name" id="name">${user.name}</h1>
+                    <div class="p-relative">
+                        <h1 class="user-name" id="name">${user.name}</h1>
+                        <button class="btn btn-contact" id="modal-btn">Contactez-moi</button>
+                    </div>
                     <p class="user-city" id="city">${user.city}</p>
                     <p class="user-desc" id="desc">${user.tagline}</p>
-                    <div class="user-tag" id="user-tag">
-                    ${user.tags.map((tag) => `<div class="tag"><span>#${tag}</span></div>`).join("")}
-                    </div>
-                    <button class="btn btn-contact" id="modal-btn">Contactez-moi</button>
                 </div>
                 <div class="user">
                     <img alt="Image de profil" id="img-profil" src="assets/profil/Photographers ID Photos/${user.portrait}">
                 </div>
             </div>
         `;
+
+        // <div class="user-tag" id="user-tag">
+        //     ${user.tags.map((tag) => `<div class="tag"><span>#${tag}</span></div>`).join("")}
+        // </div>
 
         document.getElementById('profil').innerHTML = templatePage;
         document.getElementById('contact-name').textContent = user.name;
