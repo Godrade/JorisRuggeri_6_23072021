@@ -23,15 +23,15 @@
     <section class="container">
         <div class="content-dropdown">
             <div class="dropblock">
-                <label for="selectFiltre">
-                    Trier par
-                    <select id="selectFiltre">
-                    <option>Filtres</option>
-                    <option id="orderByLike">Popularité</option>
-                    <option id="orderByDate">Date</option>
-                    <option id="orderByName">Titre</option>
-                </select>
-                </label>
+                <p>Trier par</p>
+                <div class="custom-select" id="dropDownBtn">
+                    <div class="select-selected"><span id="filter-name">Filtres</span> <em class="fas fa-chevron-down fa-x3 float-right"></em></div>
+                    <div class="select-items" id="select-hide">
+                        <div class="filter" id="Popularité" data-filter="orderByLike">Popularité <em class="fas fa-chevron-up fa-x2"></em></div>
+                        <div class="filter" id="Date" data-filter="orderByDate">Date</div>
+                        <div class="filter" id="Titre" data-filter="orderByName">Titre</div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="portfolio" id="portfolio"></div>
@@ -45,8 +45,8 @@
                 <em class="fas fa-chevron-left fa-3x" id="chevron-left"></em>
                 <em class="fas fa-chevron-right fa-3x" id="chevron-right"></em>
             </div>
-                <div class="media-carousel" id="media-carousel"></div>
-                <p id="carousel-media-name"></p>
+            <div class="media-carousel" id="media-carousel"></div>
+            <p id="carousel-media-name"></p>
         </div>
     </div>
 

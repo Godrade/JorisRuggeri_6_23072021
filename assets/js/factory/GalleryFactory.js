@@ -38,9 +38,10 @@ export class GaleryFactory {
 
         const like = document.querySelectorAll('.like-icon');
         like.forEach(elt => elt.addEventListener('click', function (e) {
-            let gLike = document.getElementById('totalLike');
-            let iLike = document.getElementById(`heart-${elt.getAttribute('data-id')}`);
-            let like = document.getElementById(`like-${elt.getAttribute('data-id')}`);
+            const gLike = document.getElementById('totalLike');
+            const iLike = document.getElementById(`heart-${elt.getAttribute('data-id')}`);
+            const like = document.getElementById(`like-${elt.getAttribute('data-id')}`);
+            
             let nLike = Number(like.textContent);
             let gnLike = Number(gLike.textContent);
 
