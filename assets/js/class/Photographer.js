@@ -10,7 +10,7 @@ export class Photographer {
                         <h1 class="user-name" id="name">${user.name}</h1>
                         <button class="btn btn-contact" id="modal-btn">Contactez-moi</button>
                     </div>
-                    <p class="user-city" id="city">${user.city}</p>
+                    <h2 class="user-city" id="city">${user.city}</h2>
                     <p class="user-desc" id="desc">${user.tagline}</p>
                 </div>
                 <div class="user">

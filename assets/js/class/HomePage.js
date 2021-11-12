@@ -11,9 +11,10 @@ export class HomePage {
             const templatePage = `
             <a href="profil.html?id=${photographer.id}" id="link-profil-${photographer.id}">
                 <div class="user" id="user-${photographer.id}">
-                    <img src="assets/profil/Photographers ID Photos/${photographer.portrait}">
-                    <p>${photographer.name}</p></div>
-                <div class="info-user" id="info-user-${photographer.id}"><p class="city">${photographer.city}</p>
+                    <img src="assets/profil/Photographers ID Photos/${photographer.portrait}" alt="Photo de profil de ${photographer.name}">
+                    <h2>${photographer.name}</h2></div>
+                <div class="info-user" id="info-user-${photographer.id}">
+                    <p class="city">${photographer.city}</p>
                     <p class="description">${photographer.tagline}</p>
                     <p class="price">${photographer.price}€/j</p></div>
             </a>
