@@ -16,13 +16,14 @@ export class HomePage {
                 <div class="info-user" id="info-user-${photographer.id}"><p class="city">${photographer.city}</p>
                     <p class="description">${photographer.tagline}</p>
                     <p class="price">${photographer.price}€/j</p></div>
-                <div class="user-tag" id="user-tag-${photographer.id}">
-                    <div id="tag-${photographer.id}" class="tag">
-                        ${photographer.tags.map((tag) => `<span>#${tag}</span>`).join("")}
-                    </div>
-                </div>
             </a>
             `;
+
+            // <div class="user-tag" id="user-tag-${photographer.id}">
+            //     <div id="tag-${photographer.id}" class="tag">
+            //         ${photographer.tags.map((tag) => `<span>#${tag}</span>`).join("")}
+            //     </div>
+            // </div>
 
             divSection.appendChild(divElt);
             divElt.innerHTML = templatePage;
