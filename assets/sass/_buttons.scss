@@ -15,18 +15,14 @@
   font-size: 20px;
   top: 0;
   right: 0;
-}
+  transition: 0.2s;
 
-/*.btn-contact {
-  background-color: $red;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  font-weight: 700;
-  font-size: 20px;
-  bottom: 165px;
-  left: 390px;
-}*/
+  &:hover {
+    transition: 0.2s;
+    background-color: $red-hover;
+    color: black;
+  }
+}
 
 .btn-dropdown {
   @extend .btn;
