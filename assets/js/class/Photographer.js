@@ -49,6 +49,24 @@ export class Photographer {
         return totalLike;
     }
 
+    updateLike(elt){
+        const totalLike = document.getElementById('totalLike');
+        const iconLike = document.getElementById(`heart-${elt.getAttribute('data-id')}`);
+        const numberlike = document.getElementById(`like-${elt.getAttribute('data-id')}`);
+
+        if(iconLike.classList.contains('far')){
+            iconLike.classList.add('fas');
+            iconLike.classList.remove('far');
+            numberlike.textContent = Number(numberlike.textContent) + 1;
+            totalLike.textContent = Number(totalLike.textContent) + 1;
+        } else {
+            iconLike.classList.add('far');
+            iconLike.classList.remove('fas');
+            numberlike.textContent = Number(numberlike.textContent) - 1;
+            totalLike.textContent = Number(totalLike.textContent) - 1;
+        }
+    }
+
     getUser(data){
         const userID = window.location.href.split('?id=')[1];
         return data.photographers.find(photographer => photographer.id === Number(userID));

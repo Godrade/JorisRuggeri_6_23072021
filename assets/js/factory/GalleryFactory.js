@@ -1,5 +1,6 @@
 import { MediaFactory } from "./MediaFactory";
 import { Carousel } from "../class/Carousel";
+import { Photographer } from "../class/photographer";
 
 export class GaleryFactory {
     create(medias, user) {
@@ -38,26 +39,7 @@ export class GaleryFactory {
 
         const like = document.querySelectorAll('.like-icon');
         like.forEach(elt => elt.addEventListener('click', function (e) {
-            const gLike = document.getElementById('totalLike');
-            const iLike = document.getElementById(`heart-${elt.getAttribute('data-id')}`);
-            const like = document.getElementById(`like-${elt.getAttribute('data-id')}`);
-            
-            let nLike = Number(like.textContent);
-            let gnLike = Number(gLike.textContent);
-
-            if(iLike.classList.contains('far')){
-                console.log(1);
-                iLike.classList.add('fas');
-                iLike.classList.remove('far');
-                like.textContent = nLike + 1;
-                gLike.textContent = gnLike + 1;
-            } else {
-                console.log(2);
-                iLike.classList.add('far');
-                iLike.classList.remove('fas');
-                like.textContent = nLike - 1;
-                gLike.textContent = gnLike - 1;
-            }
+            new Photographer().updateLike(elt);
         }, false));
     }
 }
