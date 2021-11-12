@@ -1,6 +1,6 @@
 export class FilterTags {
     callEvents(data){
-        const tagList = document.querySelectorAll("button");
+        const tagList = document.querySelectorAll("span");
         tagList.forEach((filterTag) => filterTag.addEventListener("click", () => this.filter(filterTag.id, data)));
     }
 
