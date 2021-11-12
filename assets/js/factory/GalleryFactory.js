@@ -18,7 +18,7 @@ export class GaleryFactory {
                     ${mediaHTML}
                     <div class="profil-item-info" id="info-${media.id}">
                         <p class="portfolio-name" id="name-${media.id}">${media.title}</p>
-                        <p class="portfolio-name"><span class="like-number" id="like-${media.id}">${media.likes}</span> <i class="far fa-heart like-icon" data-id="${media.id}" id="heart-${media.id}"></i></p>
+                        <p class="portfolio-name"><span class="like-number" id="like-${media.id}">${media.likes}</span> <em class="far fa-heart like-icon" data-id="${media.id}" id="heart-${media.id}"></em></p>
                     </div>
                 </div>`;
                 

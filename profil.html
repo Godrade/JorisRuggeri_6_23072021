@@ -16,20 +16,22 @@
 </header>
 <main>
     <div class="info-like-price">
-        <p><span id="totalLike"></span> <i class="fas fa-heart"></i></p>
+        <p><span id="totalLike"></span> <em class="fas fa-heart"></em></p>
         <p><span id="user-price"></span>€/jour</p>
     </div>
     <section class="container profil" id="profil"></section>
     <section class="container">
         <div class="content-dropdown">
-            <p>Trier par</p>
             <div class="dropblock">
-                <select id="selectFiltre">
+                <label for="selectFiltre">
+                    Trier par
+                    <select id="selectFiltre">
                     <option>Filtres</option>
                     <option id="orderByLike">Popularité</option>
                     <option id="orderByDate">Date</option>
                     <option id="orderByName">Titre</option>
                 </select>
+                </label>
             </div>
         </div>
         <div class="portfolio" id="portfolio"></div>
@@ -38,10 +40,10 @@
     <!-- CAROUSEL -->
     <div class="carousel-bc" id="carousel">
         <div class="container-carousel">
-            <i class="fas fa-times fa-3x cross" id="close-modal"></i>
+            <em class="fas fa-times fa-3x cross" id="close-modal"></em>
             <div class="chevron">
-                <i class="fas fa-chevron-left fa-3x" id="chevron-left"></i>
-                <i class="fas fa-chevron-right fa-3x" id="chevron-right"></i>
+                <em class="fas fa-chevron-left fa-3x" id="chevron-left"></em>
+                <em class="fas fa-chevron-right fa-3x" id="chevron-right"></em>
             </div>
                 <div class="media-carousel" id="media-carousel"></div>
                 <p id="carousel-media-name"></p>
@@ -84,7 +86,6 @@
         </div>
     </div>
 </main>
-<!--<script src="assets/js/ProfilClass.js"></script>-->
 <script src="assets/js/controller.js" type="module"></script>
 </body>
 </html>
