@@ -10,7 +10,7 @@ import { Dropdown } from "./class/Dropdown";
 (async function init () {
     const data = await new Data().getJson();
 
-    if(url === "/" || url === "/Formation/DFE/FishEye/"){
+    if(url === "/" || url === "/Formation/DFE/FishEye/" || url === "/index.html" || url === "/Formation/DFE/FishEye/index.html"){
         new HomePage().create(data);
         new FilterTags().callEvents(data);
     } else {
