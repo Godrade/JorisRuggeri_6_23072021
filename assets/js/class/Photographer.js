@@ -7,14 +7,16 @@ export class Photographer {
             <div class="content-user">
                 <div class="profil-info">
                     <div class="p-relative">
-                        <h1 class="user-name" id="name">${user.name}</h1>
-                        <button class="btn btn-contact" id="modal-btn">Contactez-moi</button>
+                        <h1 class="user-name" id="name" role="heading">${user.name}</h1>
+                        <button class="btn btn-contact" id="modal-btn" role="button" aria-label="Contact Me">Contactez-moi</button>
                     </div>
-                    <h2 class="user-city" id="city">${user.city}</h2>
-                    <p class="user-desc" id="desc">${user.tagline}</p>
+                    <div role="text">
+                        <p class="user-city" id="city">${user.city}</p>
+                        <p class="user-desc" id="desc">${user.tagline}</p>
+                    </div>
                 </div>
                 <div class="user">
-                    <img alt="Image de profil" id="img-profil" src="assets/profil/Photographers ID Photos/${user.portrait}">
+                    <img alt="${user.name}" id="img-profil" src="assets/profil/Photographers ID Photos/${user.portrait}">
                 </div>
             </div>
         `;

@@ -16,11 +16,7 @@ export class Dropdown {
 
     callEvents(user, data){
         this.dropdownBtn.addEventListener('click', (e) =>{
-            if(this.dropMenu.style.display == 'none' || this.dropMenu.style.display == ""){
-                this.dropMenu.style.display = 'block';
-            } else {
-                this.dropMenu.style.display = 'none';
-            }
+            this.toggleDropDown();
         })
 
         this.dropList.forEach(list => {
@@ -29,8 +25,67 @@ export class Dropdown {
                 this.filterName.textContent = list.id
             })
         })
+
+        const listbox = document.querySelector('[role="listbox"]')
+        const characters = [...listbox.children]
+
+        listbox.addEventListener('click', event => {
+        const option = event.target.closest('li')
+        if (!option) return
+
+        option.focus()
+
+        // Sets aria-activedescendant value
+        listbox.setAttribute('aria-activedescendant', option.id)
+
+        // Change visual appearance
+        characters.forEach(element => element.classList.remove('is-selected'))
+        option.classList.add('is-selected')
+        })
+
+        listbox.addEventListener('keydown', event => {
+            console.log(event);
+
+            const { key } = event
+            if (key !== 'ArrowDown' && key !== 'ArrowUp' && key !== 'Enter') return
+          
+            const activeElementID = listbox.getAttribute('aria-activedescendant')
+            const activeElement = listbox.querySelector('#' + activeElementID)
+          
+            let selectedOption
+            console.log({ key });
+            if (key === 'ArrowDown') selectedOption = activeElement.nextElementSibling
+            if (key === 'ArrowUp') selectedOption = activeElement.previousElementSibling
+            if (key === 'Enter') {
+                this.updateSort(event.target.getAttribute('data-filter'), user, data);
+                this.filterName.textContent = event.target.id
+                this.toggleDropDown();
+            }
+          
+            if (selectedOption) {
+              // Sets aria-activedescendant value
+              listbox.setAttribute('aria-activedescendant', selectedOption.id)
+          
+              // Change visual appearance
+              characters.forEach(element => element.classList.remove('is-selected'))
+              selectedOption.classList.add('is-selected')
+
+              selectedOption.focus()
+                characters.forEach(element => { element.setAttribute('tabindex', -1) })
+                selectedOption.setAttribute('tabindex', 0)
+            }
+          })
     }
     
+    toggleDropDown() {
+        console.log("toogle", this);
+        if (this.dropMenu.style.display == 'none' || this.dropMenu.style.display == "") {
+            this.dropMenu.style.display = 'block';
+        } else {
+            this.dropMenu.style.display = 'none';
+        }
+    }
+
     updateSort(sort, user, data) {
         let newMedia;
         const media = this.getMedia(data, user.id);

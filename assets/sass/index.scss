@@ -266,10 +266,6 @@ main {
   cursor: pointer;
   border-radius: 5px;
   width: 150px;
-
-  em {
-    float: right;
-  }
 }
 
 .select-selected:after {
@@ -281,29 +277,51 @@ main {
   height: 0;
 }
 
-.select-items div,.select-selected {
+button {
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+}
+
+.select-items, .select-selected {
   color: #ffffff;
   padding: 16px 0 16px 5px;
   cursor: pointer;
 }
 
-.select-items {
+ul {
   position: absolute;
   background-color: $red;
   border-radius: 5px;
   padding: 0 10px;
-  top: 3px;
+  top: 0;
   left: 0;
   right: 0;
   z-index: 99;
+  list-style-type: none;
 
-  div {
+  li {
+    padding: 10px 10px;
     border-top: 1px solid white;
+
+    em {
+      float: right;
+    }
+
   }
 
-  div:nth-child(1){
+  li:nth-child(1) {
     border: none;
   }
+}
+
+
+.is-selected {
+  background-color: $red;
+}
+
+li:focus {
+  background: $red;
 }
 
 #select-hide {
@@ -520,4 +538,3 @@ textarea {
 
   }
 }
-

@@ -12,7 +12,7 @@
 </head>
 <body>
 <header>
-    <a href="index.html"><img src="assets/images/logo.png" alt="Logo FishEye"></a>
+    <a href="index.html"><img src="assets/images/logo.png" alt="FishEye Home Page" role="link"></a>
 </header>
 <main>
     <div class="info-like-price">
@@ -25,62 +25,62 @@
             <div class="dropblock">
                 <h2>Trier par</h2>
                 <div class="custom-select" id="dropDownBtn">
-                    <div class="select-selected"><span id="filter-name">Filtres</span> <em class="fas fa-chevron-down fa-x3 float-right"></em></div>
-                    <div class="select-items" id="select-hide">
-                        <div class="filter" id="Popularité" data-filter="orderByLike">Popularité <em class="fas fa-chevron-up fa-x2"></em></div>
-                        <div class="filter" id="Date" data-filter="orderByDate">Date</div>
-                        <div class="filter" id="Titre" data-filter="orderByName">Titre</div>
-                    </div>
+                    <button class="select-selected" role="button" id="dropdown_btn" aria-expanded="true"><span id="filter-name">Filtres</span> <em class="fas fa-chevron-down fa-x3 float-right"></em></button>
+                    <ul class="select-items" id="select-hide" aria-labelledby="dropdown_btn" role="listbox" tabindex="0" aria-activedescendant="Popularité">
+                        <li role="option" tabindex="-1" class="filter is-selected" id="Popularité" data-filter="orderByLike">Popularité <em class="fas fa-chevron-up fa-x2"></em></li>
+                        <li role="option" tabindex="-1" class="filter" id="Date" data-filter="orderByDate">Date</li>
+                        <li role="option" tabindex="-1" class="filter" id="Titre" data-filter="orderByName">Titre</li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="portfolio" id="portfolio"></div>
+        <article class="portfolio" id="portfolio" aria-label="image closeup view"></article>
     </section>
 
     <!-- CAROUSEL -->
-    <div class="carousel-bc" id="carousel">
+    <div class="carousel-bc" id="carousel" role="dialog" aria-label="image closeup view">
         <div class="container-carousel">
-            <em class="fas fa-times fa-3x cross" id="close-modal"></em>
+            <em class="fas fa-times fa-3x cross" id="close-modal" aria-label="Close dialog" role="button"></em>
             <div class="chevron">
-                <em class="fas fa-chevron-left fa-3x" id="chevron-left"></em>
-                <em class="fas fa-chevron-right fa-3x" id="chevron-right"></em>
+                <em class="fas fa-chevron-left fa-3x" id="chevron-left" role="link" aria-label="Previous image"></em>
+                <em class="fas fa-chevron-right fa-3x" id="chevron-right" role="link" aria-label="Next image"></em>
             </div>
-            <div class="media-carousel" id="media-carousel"></div>
-            <p id="carousel-media-name"></p>
+            <div class="media-carousel" id="media-carousel" role="img"></div>
+            <p id="carousel-media-name" role="text"></p>
         </div>
     </div>
 
 
     <!-- MODAL -->
-    <div class="bground" id="bground">
+    <div class="bground" id="bground" aria-labelledby="contact-name" role="dialog">
         <div class="content">
-            <span class="close"></span>
+            <span class="close" aria-label="Close Contact form" role="button"></span>
             <div class="modal-body">
                 <form id="form" name="contact" action="profil.html" method="get">
-                    <h2>Contactez-moi <span id="contact-name"></span></h2>
+                    <h2 role="heading">Contactez-moi <span id="contact-name"></span></h2>
                     <div class="formData">
                         <label for="form_firstName">Prénom</label><br>
                         <input class="text-control" type="text" id="form_firstName" name="form_firstName"
-                               minlength="2"/>
+                               minlength="2" role="text" />
                         <span class="text-error" id="firstName-error"></span><br>
                     </div>
                     <div class="formData">
                         <label for="form_lastName">Nom</label><br>
-                        <input class="text-control" type="text" id="form_lastName" name="form_lastName"/>
+                        <input class="text-control" type="text" id="form_lastName" name="form_lastName" role="text"/>
                         <span class="text-error" id="lastName-error"></span><br>
                     </div>
                     <div class="formData">
                         <label for="form_email">E-mail</label><br>
-                        <input class="text-control" type="email" id="form_email" name="form_email"/>
+                        <input class="text-control" type="email" id="form_email" name="form_email" role="text"/>
                         <span class="text-error" id="email-error"></span><br>
                     </div>
                     <div class="formData">
                         <label for="form_message">Votre message</label><br>
                         <textarea class="text-control" id="form_message" name="form_message"
-                                  rows="5"></textarea>
+                                  rows="5" role="text"></textarea>
                         <span class="text-error" id="quantity-error"></span><br>
                     </div>
-                    <button class="btn-submit button" type="submit">Envoyer</button>
+                    <button class="btn-submit button" type="submit" aria-label="send">Envoyer</button>
                 </form>
             </div>
         </div>

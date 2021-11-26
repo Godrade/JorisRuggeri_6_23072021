@@ -15,11 +15,11 @@ export class GaleryFactory {
                 const mediaHTML = new MediaFactory().render(media, name)
         
                 const templatePage = `
-                <div class="portfolio-item" id="item-${media.id}">
+                <div class="portfolio-item" id="item-${media.id}" role="link" aria-label="Lilac breasted roller, closeup view">
                     ${mediaHTML}
                     <div class="profil-item-info" id="info-${media.id}">
                         <h3 class="portfolio-name" id="name-${media.id}">${media.title}</h3>
-                        <h3 class="portfolio-name"><span class="like-number" id="like-${media.id}">${media.likes}</span> <em class="far fa-heart like-icon" data-id="${media.id}" id="heart-${media.id}"></em></h3>
+                        <h3 class="portfolio-name"><span class="like-number" aria-label="likes" id="like-${media.id}">${media.likes}</span> <em class="far fa-heart like-icon" data-id="${media.id}" id="heart-${media.id}"></em></h3>
                     </div>
                 </div>`;
                 
