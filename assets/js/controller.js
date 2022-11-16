@@ -10,15 +10,15 @@ import { Dropdown } from "./class/Dropdown";
 (async function init () {
     const data = await new Data().getJson();
 
-    if(url === "/" || url === "/Formation/DFE/FishEye/" || url === "/index.html" || url === "/Formation/DFE/FishEye/index.html"){
+    if(url.includes('index.html')){
+        console.log('0');
         new HomePage().create(data);
         new FilterTags().callEvents(data);
     } else {
         const user = new Photographer().getUser(data);
-
-        new Dropdown(user, data);
         new Photographer().create(data);
-
+        
+        new Dropdown(user, data);
         new Form().callEvents();
     }
 })()

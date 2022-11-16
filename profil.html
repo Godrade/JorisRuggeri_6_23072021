@@ -25,20 +25,24 @@
             <div class="dropblock">
                 <h2>Trier par</h2>
                 <div class="custom-select" id="dropDownBtn">
-                    <button class="select-selected" role="button" id="dropdown_btn" aria-expanded="true"><span id="filter-name">Filtres</span> <em class="fas fa-chevron-down fa-x3 float-right"></em></button>
+                    <button class="select-selected" role="button" aria-haspopup="listbox" id="dropdown_btn" aria-expanded="true"><span id="filter-name">Filtres</span> <em class="fas fa-chevron-down fa-x3 float-right"></em></button>
                     <ul class="select-items" id="select-hide" aria-labelledby="dropdown_btn" role="listbox" tabindex="0" aria-activedescendant="Popularité">
-                        <li role="option" tabindex="-1" class="filter is-selected" id="Popularité" data-filter="orderByLike">Popularité <em class="fas fa-chevron-up fa-x2"></em></li>
-                        <li role="option" tabindex="-1" class="filter" id="Date" data-filter="orderByDate">Date</li>
-                        <li role="option" tabindex="-1" class="filter" id="Titre" data-filter="orderByName">Titre</li>
+                        <li role="option" tabindex="0" class="filter is-selected" id="Popularité" data-filter="orderByLike">Popularité <em class="fas fa-chevron-up fa-x2"></em></li>
+                        <li role="option" tabindex="0" class="filter" id="Date" data-filter="orderByDate">Date</li>
+                        <li role="option" tabindex="0" class="filter" id="Titre" data-filter="orderByName">Titre</li>
                     </ul>
                 </div>
             </div>
         </div>
-        <article class="portfolio" id="portfolio" aria-label="image closeup view"></article>
     </section>
 
+    <section class="container">
+        <div class="portfolio" id="portfolio" aria-label="image-closeup-view">
+        </div>
+    </section>
+    
     <!-- CAROUSEL -->
-    <div class="carousel-bc" id="carousel" role="dialog" aria-label="image closeup view">
+    <div class="carousel-bc" id="carousel" role="dialog" aria-label="image-closeup-view">
         <div class="container-carousel">
             <em class="fas fa-times fa-3x cross" id="close-modal" aria-label="Close dialog" role="button"></em>
             <div class="chevron">
