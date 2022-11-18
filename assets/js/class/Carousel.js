@@ -35,6 +35,11 @@ export class Carousel {
                 this.index = this.next();
                 this.update()
             }
+
+            if(e.key === 'Escape'){
+                this.modal.style.display = 'none';
+            }
+
         }, false);
 
         this.cLeft.addEventListener('click', (e) => {
