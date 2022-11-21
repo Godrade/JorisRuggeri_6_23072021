@@ -26,31 +26,14 @@ export class Carousel {
         })
 
         window.addEventListener('keydown', (e) => {
-            if(e.key === 'ArrowLeft'){
-                this.index = this.before();
-                this.update()
-            }
+            if(e.key === 'ArrowLeft') this.index = this.before(); this.update()
+            if(e.key === 'ArrowRight') this.index = this.next(); this.update()
 
-            if(e.key === 'ArrowRight'){
-                this.index = this.next();
-                this.update()
-            }
-
-            if(e.key === 'Escape'){
-                this.modal.style.display = 'none';
-            }
-
+            if(e.key === 'Escape') this.modal.style.display = 'none';
         }, false);
 
-        this.cLeft.addEventListener('click', (e) => {
-            this.index = this.before();
-            this.update()
-        })
-
-        this.cRight.addEventListener('click', (e) => {
-            this.index = this.next();
-            this.update()
-        })
+        this.cLeft.addEventListener('click', (e) => { this.index = this.before(); this.update() })
+        this.cRight.addEventListener('click', (e) => { this.index = this.next(); this.update() })
     }
 
     update(){
