@@ -15,6 +15,7 @@ export class Modal {
 
     launchModal() {
         this.modalbg.style.display = "block";
+        document.getElementById('form_firstName').setAttribute('autofocus', '')
     }
 
     closeModal() {
@@ -24,11 +25,15 @@ export class Modal {
 
     eventBtn(){
         const modalClose = document.querySelectorAll('.close');
-        const btnModalClose = document.getElementById('close-modal');
         modalClose.forEach((btn) =>{
             btn.addEventListener('click', () => {
                 this.modal({ open: false });
             });
+        });
+        window.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape') {
+                this.modal({ open: false });
+            }
         });
     }
 }

@@ -335,6 +335,7 @@ li:focus {
   z-index: 1;
   left: 0;
   top: 0;
+  padding-top: 30px;
   height: 100%;
   width: 100%;
   overflow: auto;
@@ -342,7 +343,7 @@ li:focus {
 }
 
 .content {
-  margin: 5% auto;
+  margin: auto;
   width: 100%;
   max-width: 670px;
   animation-name: modalopen;

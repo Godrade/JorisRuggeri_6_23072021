@@ -11,7 +11,6 @@ import { Dropdown } from "./class/Dropdown";
     const data = await new Data().getJson();
 
     if(url.includes('index.html')){
-        console.log('0');
         new HomePage().create(data);
         new FilterTags().callEvents(data);
     } else {
